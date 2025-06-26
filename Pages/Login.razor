@@ -1,0 +1,20 @@
+﻿@page "/login"
+@using LucyContainerFront.ViewModels
+@inject LoginViewModel ViewModel
+
+<h3>Login</h3>
+
+<EditForm Model="ViewModel.LoginModel" OnValidSubmit="ViewModel.LoginCommand.Execute">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="ViewModel.LoginModel.Username" class="form-control" Placeholder="Username" />
+    <InputText @bind-Value="ViewModel.LoginModel.Password" class="form-control" type="password" Placeholder="Password" />
+
+    <button class="btn btn-primary" type="submit">Login</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(ViewModel.ErrorMessage))
+{
+    <p class="text-danger">@ViewModel.ErrorMessage</p>
+}

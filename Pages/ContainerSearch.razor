@@ -1,0 +1,45 @@
+﻿@page "/ContainerSearch"
+@using System.ComponentModel
+@using LucyContainerFront.ViewModels
+@inject ContainerSearchViewModel ViewModel
+@inherits ViewModelComponentBase<ContainerSearchViewModel>
+<h3>ContainerSearch</h3>
+
+<EditForm Model="ViewModel.ContainerSearchModel" OnValidSubmit="ViewModel.SearchCommand.Execute">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText @bind-Value="ViewModel.ContainerSearchModel.Data" class="form-control" Placeholder="Container Number" />
+    <button class="btn btn-primary" type="submit">Search</button>
+</EditForm>
+@* display results *@
+@if (ViewModel.ContainersList is not null && ViewModel.ContainersList.Count > 0)
+{
+@foreach (var c in ViewModel.ContainersList)
+{
+<button class="btn btn-sm btn-outline-secondary"
+          @onclick="() => ViewModel.LoadContainerDataCommand.Execute(c.Data)">
+    @c.Data
+</button>
+}
+}
+else if (!ViewModel.SearchCommand.IsRunning && ViewModel.ContainersList != null)
+{
+<p class="text-muted">No containers found.</p>
+}
+
+@if(ViewModel.ContainerData is not null)
+{
+    <h4>Container Details</h4>
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="card-title">Container: @ViewModel.ContainerData.Container</p>
+            <p class="card-text">Manifest: @ViewModel.ContainerData.Manifest</p>
+            <p class="card-text">Size: @ViewModel.ContainerData.ContainerLength</p>
+            <p class="card-text">Type: @ViewModel.ContainerData.ContainerTypeCode</p>
+            <p class="card-text">Line: @ViewModel.ContainerData.CarrierCode</p>
+            <p class="card-text">Terminal: @ViewModel.ContainerData.TerminalName</p>
+            
+        </div> 
+  </div>
+}
+           
