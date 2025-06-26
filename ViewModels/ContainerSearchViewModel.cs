@@ -16,7 +16,10 @@ namespace LucyContainerFront.ViewModels
         [ObservableProperty] private StringDto containerSearchModel = new();
         [ObservableProperty] private string? errorMessage;
         [ObservableProperty] private List<StringDto> containersList = new();
-        [ObservableProperty] private ContainerData containerData = null;
+        [ObservableProperty] private ContainerData? containerData = null;
+        [ObservableProperty] private DestinationData? destinationData = new();
+
+        
         private string terminal = string.Empty;
         public ContainerSearchViewModel(IContainerService containerService, 
                                         NavigationManager navigation,
@@ -38,6 +41,12 @@ namespace LucyContainerFront.ViewModels
         {
             ContainerData = new();
             ContainerData  = await _containerService.GetContainerDataAsync(selected, terminal);
+        }
+        [RelayCommand]
+        private async Task SetContainerAVDMAsync(string avdm)
+        {
+            ContainerData.AVDM = avdm;
+            DestinationData = await _containerService.GetDestinationDataAsync(ContainerData);
         }
     }
 }

@@ -41,5 +41,15 @@ else if (!ViewModel.SearchCommand.IsRunning && ViewModel.ContainersList != null)
             
         </div> 
   </div>
+  <div>
+      <button class="btn btn-sm" 
+              @onclick='() => ViewModel.SetContainerAVDMCommand.Execute("AV")'>
+        AV Containr
+      </button>
+      <button class="btn btn-sm" 
+              @onclick='() => ViewModel.SetContainerAVDMCommand.Execute("DM")'>
+        DM Containr
+      </button>
+  </div>
 }
            
