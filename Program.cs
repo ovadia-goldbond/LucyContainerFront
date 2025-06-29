@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
+using Blazored.Modal;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -13,7 +14,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 var apiBaseUrl = builder.Configuration["ApiBaseUrl"];
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+builder.Services.AddBlazoredModal(); // Add Blazored Modal support
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IContainerService, ContainerService>();
 builder.Services.AddScoped<AuthorizationMessageHandler>();

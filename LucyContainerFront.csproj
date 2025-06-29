@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lucy.Shared\Lucy.Shared.csproj" />
+    <ProjectReference Include="..\newModal\Blazored.Modal.csproj" />
   </ItemGroup>
 
   <ItemGroup>
