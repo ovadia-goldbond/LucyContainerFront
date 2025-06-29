@@ -1,20 +1,27 @@
 ﻿@page "/login"
-@using LucyContainerFront.ViewModels
-@inject LoginViewModel ViewModel
+@using LucyContainerFront.Pages.Modals
 
 <h3>Login</h3>
 
-<EditForm Model="ViewModel.LoginModel" OnValidSubmit="ViewModel.LoginCommand.Execute">
+<EditForm Model="LoginModel" OnValidSubmit="@(async () => await UserLoginAsync())">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <InputText @bind-Value="ViewModel.LoginModel.Username" class="form-control" Placeholder="Username" />
-    <InputText @bind-Value="ViewModel.LoginModel.Password" class="form-control" type="password" Placeholder="Password" />
+    <InputText @bind-Value="LoginModel.Username" class="form-control" Placeholder="Username" />
+    <InputText @bind-Value="LoginModel.Password" class="form-control" type="password" Placeholder="Password" />
 
     <button class="btn btn-primary" type="submit">Login</button>
 </EditForm>
+<button @onclick="@(() => ShowMovieModalAsync())">View Movies</button>
+ 
 
-@if (!string.IsNullOrEmpty(ViewModel.ErrorMessage))
+@if (!string.IsNullOrEmpty(ErrorMessage))
 {
-    <p class="text-danger">@ViewModel.ErrorMessage</p>
+    <p class="text-danger">@ErrorMessage</p>
+}
+
+@code{
+
+
+
 }

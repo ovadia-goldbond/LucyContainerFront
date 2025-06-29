@@ -1,5 +1,4 @@
 using LucyContainerFront;
-using LucyContainerFront.ViewModels;
 using LucyShared.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -54,6 +53,4 @@ builder.Services
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 
-builder.Services.AddScoped<LoginViewModel>();
-builder.Services.AddScoped<ContainerSearchViewModel>();
 await builder.Build().RunAsync();

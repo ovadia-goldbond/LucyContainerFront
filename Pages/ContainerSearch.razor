@@ -1,53 +1,51 @@
 ﻿@page "/ContainerSearch"
 @using System.ComponentModel
-@using LucyContainerFront.ViewModels
-@inject ContainerSearchViewModel ViewModel
-@inherits ViewModelComponentBase<ContainerSearchViewModel>
+
 <h3>ContainerSearch</h3>
 
-<EditForm Model="ViewModel.ContainerSearchModel" OnValidSubmit="ViewModel.SearchCommand.Execute">
+<EditForm Model="ContainerSearchModel" OnValidSubmit="@(async () => await SearchAsync())">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <InputText @bind-Value="ViewModel.ContainerSearchModel.Data" class="form-control" Placeholder="Container Number" />
+    <InputText @bind-Value="ContainerSearchModel.Data" class="form-control" Placeholder="Container Number" />
     <button class="btn btn-primary" type="submit">Search</button>
 </EditForm>
 @* display results *@
-@if (ViewModel.ContainersList is not null && ViewModel.ContainersList.Count > 0)
+@if (ContainersList is not null && ContainersList.Count > 0)
 {
-@foreach (var c in ViewModel.ContainersList)
-{
-<button class="btn btn-sm btn-outline-secondary"
-          @onclick="() => ViewModel.LoadContainerDataCommand.Execute(c.Data)">
-    @c.Data
-</button>
+    @foreach (var c in ContainersList)
+    {
+    <button class="btn btn-sm btn-outline-secondary"
+              @onclick="async () => await LoadContainerDataAsync(c.Data)">
+        @c.Data
+    </button>
+    }
 }
-}
-else if (!ViewModel.SearchCommand.IsRunning && ViewModel.ContainersList != null)
+else if (ContainersList is null)
 {
 <p class="text-muted">No containers found.</p>
 }
 
-@if(ViewModel.ContainerData is not null)
+@if(ContainerData is not null)
 {
     <h4>Container Details</h4>
     <div class="card mb-3">
         <div class="card-body">
-            <p class="card-title">Container: @ViewModel.ContainerData.Container</p>
-            <p class="card-text">Manifest: @ViewModel.ContainerData.Manifest</p>
-            <p class="card-text">Size: @ViewModel.ContainerData.ContainerLength</p>
-            <p class="card-text">Type: @ViewModel.ContainerData.ContainerTypeCode</p>
-            <p class="card-text">Line: @ViewModel.ContainerData.CarrierCode</p>
-            <p class="card-text">Terminal: @ViewModel.ContainerData.TerminalName</p>
+            <p class="card-title">Container: @ContainerData.Container</p>
+            <p class="card-text">Manifest: @ContainerData.Manifest</p>
+            <p class="card-text">Size: @ContainerData.ContainerLength</p>
+            <p class="card-text">Type: @ContainerData.ContainerTypeCode</p>
+            <p class="card-text">Line: @ContainerData.CarrierCode</p>
+            <p class="card-text">Terminal: @ContainerData.TerminalName</p>
             
         </div> 
   </div>
   <div>
       <button class="btn btn-sm" 
-              @onclick='() => ViewModel.SetContainerAVDMCommand.Execute("AV")'>
+              @onclick='async () => await SetContainerAVDMAsync("AV")'>
         AV Containr
       </button>
       <button class="btn btn-sm" 
-              @onclick='() => ViewModel.SetContainerAVDMCommand.Execute("DM")'>
+              @onclick='async () => await SetContainerAVDMAsync("DM")'>
         DM Containr
       </button>
   </div>

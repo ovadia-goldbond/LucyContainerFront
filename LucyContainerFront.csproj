@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="7.3.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.16" />
@@ -18,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lucy.Shared\Lucy.Shared.csproj" />
-    <ProjectReference Include="..\newModal\Blazored.Modal.csproj" />
   </ItemGroup>
 
   <ItemGroup>

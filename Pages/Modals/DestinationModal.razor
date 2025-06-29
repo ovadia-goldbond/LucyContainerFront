@@ -1,0 +1,15 @@
+﻿@namespace LucyContainerFront.Pages.Modals
+@using LucyShared.Models
+Hello Destination!
+<container>
+    <p class="card-title">Destination: @Destination.DestinationDesc</p>
+    <p class="card-text">Code: @Destination.ShipingLineCode</p>
+</container>
+@code {
+    [Parameter]
+    public DestinationData Destination { get; set; }
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+}
